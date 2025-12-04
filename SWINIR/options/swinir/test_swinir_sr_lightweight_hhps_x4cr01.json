@@ -1,0 +1,44 @@
+{
+  "task": "test_swinir_sr_lightweight_hhps_x4cr01"     
+  , "model": "plain"
+  , "gpu_ids": [0]
+  , "dist": false
+  ,"scale": 4       
+  , "n_channels": 3  
+
+  , "path": {
+    "root": "superresolution"           
+    , "pretrained_netG": "pretrained/swinir_sr_lightweight_hhps_x4cr01.pth"
+  }
+
+  , "datasets": {
+    "test": {
+      "name": "test_dataset"            // just name
+      , "dataset_type": "sr"        
+    }
+  }
+
+  , "netG": {
+    "net_type": "swinirps" 
+    , "upscale": 4                     
+    , "in_chans": 3 
+    , "img_size": 64
+    , "window_size": 8  
+    , "img_range": 1.0 
+    , "depths": [6, 6, 6, 6]
+    , "embed_dim": 60 
+    , "num_heads": [6, 6, 6, 6]
+    , "mlp_ratio": 2 
+    , "upsampler": "pixelshuffledirect"       
+    , "resi_connection": "1conv"        
+    , "init_type": "default"
+    , "split_ratio": 0.4
+    , "grad_type": "avg"
+    , "cr": 0.1    // 10x compression ratio
+  }
+
+  , "train": {
+    "E_decay": 0.999,
+    "G_param_strict": false                 
+  }
+}
